@@ -5,7 +5,8 @@ class Paddle
 		@window = window
 		@x = 200
 		@y = 550
-		@w, @h = 60, 20
+		@vx = 10
+		@w, @h = 80, 20
 		@image = Gosu::Image.new(@window, './img/paddle.png', false)
 	end
 
@@ -14,14 +15,14 @@ class Paddle
 	end
 
 	def move_left
-		unless @y < 0
-			@y -= 5
+		unless @x < 0
+			@x -= @vx
 		end
 	end
 
 	def move_right
-		unless @y > (@window.height - @h)
-			@y += 5
+		unless @x > (@window.width - @w)
+			@x += @vx
 		end
 	end
 end

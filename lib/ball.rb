@@ -14,7 +14,7 @@ class Ball
 	end
 
 	def bounce
-		@vx = -1 * @vx
+		@vy = -1 * @vy
 	end
 
 	def move
