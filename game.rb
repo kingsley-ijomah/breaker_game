@@ -11,6 +11,13 @@ class GameWindow < Gosu::Window
 		super @width, @height, false
 		self.caption = 'Breaker Game'
 		@ball = Ball.new(self)
+		@paddle = Paddle.new(self)
+		@bricks = []
+		(1..5).each do |row|
+			(1..10).each do |col|
+				@bricks.push Brick.new(self, col * 70, row * 30)
+			end
+		end
 	end
 
 	def touching?(obj1, obj2)
@@ -19,10 +26,29 @@ class GameWindow < Gosu::Window
 
 	def update
 		@ball.move
+		if button_down?(Gosu::KbLeft)
+			@paddle.move_left
+		end
+		if button_down?(Gosu::KbRight)
+			@paddle.move_right
+		end
+		if touching?(@ball, @paddle)
+			@ball.bounce
+		end
+		@bricks.each do |brick|
+			if touching?(@ball, brick)
+				@ball.bounce
+				@bricks.delete brick
+			end
+		end
 	end
 
 	def draw
 		@ball.draw
+		@paddle.draw
+		@bricks.each do |brick|
+			brick.draw
+		end
 	end
 end
 

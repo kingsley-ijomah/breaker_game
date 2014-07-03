@@ -1,10 +1,11 @@
 class Paddle
 	attr_reader :x, :y, :w, :h
 
-	def initialize(window, xpos)
+	def initialize(window)
 		@window = window
-		@w, @h = 20, 60
-		@x, @y = xpos, (@window.height/2) - (@h / 2)
+		@x = 200
+		@y = 550
+		@w, @h = 60, 20
 		@image = Gosu::Image.new(@window, './img/paddle.png', false)
 	end
 
@@ -12,13 +13,13 @@ class Paddle
 		@image.draw(@x, @y, 1)
 	end
 
-	def move_up
+	def move_left
 		unless @y < 0
 			@y -= 5
 		end
 	end
 
-	def move_down
+	def move_right
 		unless @y > (@window.height - @h)
 			@y += 5
 		end
